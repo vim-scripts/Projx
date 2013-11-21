@@ -1,0 +1,32 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4776
+
+ projx is a simple to install, light weight project explorer plugin. It opens a project navigation panel on  the right/left side of the vim screen. When enter is pressed on a file name the file is opened in a new tab or jumps to an existing tab that already has the file
+                                                                                       
+ It supports project wide grep that will show all the instances in the quickfix window. 
+                                                                                       
+ When enabled, it automatically creates and updates tag file for the list of files in the project.
+
+ Works well with cppnav plugin
+ http://www.vim.org/scripts/script.php?script_id=4763
+
+SCREEN SHOTS:
+  http://vim.wikia.com/wiki/Projx_Vim_Plugin
+                                                                                       
+USAGE:
+ To use this plugin, simply place a .projx file in the root of working directory with all the file names (with relative path) in the project (one per line)
+                                                                                       
+ :Projx [<project file>] to open or close the project navigation panel. Optionally specify the project file name to this command.
+                                                                                       
+ :Pgrep <regx> to search for a string across all the files in the project. Results are listed in the quickfix window. Preview/jump to the location using p or <enter> keys.
+                                                                                       
+ :Ptags to update the tag file. This plugin automatically updates the tag file on init (if any of the file is newer than the tag file)
+                                                                                       
+ :Pfilter <wildcard expression> to see only the specific files on the navigation panel
+                                                                                       
+OPTIONS:
+ Set the following variables in .vimrc/_vimrc file to control some of the options. 
+                                                                                       
+ let g:projx_file_def = <default project file name>           " .projx is used by default
+ let g:projx_right_win = <1/0>                                            " use right/left navigation panel
+ let g:projx_win_size = xxx                                                 " set the navigation panel width to xxx
+ let g:projx_ctag_path = <ctag executable name/path> " omit this to disable tab file creation
