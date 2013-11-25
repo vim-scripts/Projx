@@ -1,8 +1,8 @@
 " File:				projx.vim
 "
 " Author:			M Sureshkumar
-" Version:			1.0
-" Last Modified:	21-Nov-2013
+" Version:			1.1
+" Last Modified:	25-Nov-2013
 "
 " DESCRIPTION:
 "  projx is a project explorer plugin. It opens a project navigation panel on
@@ -189,6 +189,7 @@ function! s:CreateProjxWin()
 		autocmd BufEnter  <buffer> call s:ProjxBufEnter()
 		autocmd TabEnter * call s:ProjxTabEnter() 
 		autocmd BufEnter * call s:HighlightFile(expand("<afile>"))
+	 	autocmd VimResized	<buffer> call s:ResizeWindow()
 		"autocmd WinLeave  <buffer> call s:SaveView()
 		"autocmd TabLeave * call s:TabLeave()
     augroup end
@@ -196,6 +197,25 @@ function! s:CreateProjxWin()
 	let s:projx_win_active = 1
 
 	return 1
+endfunction
+
+function! s:ResizeWindow()
+    let winnum = bufwinnr(s:projx_bufname)
+
+	if winnum == -1
+		return
+	endif
+
+	let oldwin = winnr()
+	if winnum != oldwin
+		exe winnum . 'wincmd w'
+	endif
+
+	exe 'vertical resize ' . g:projx_win_size
+
+	if oldwin != winnr()
+		exe oldwin . 'wincmd w'
+	endif
 endfunction
 
 function! s:ProjxBufUnload()
